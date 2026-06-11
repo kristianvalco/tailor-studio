@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kristianvalco.github.io/tailor-studio/sitemap.xml

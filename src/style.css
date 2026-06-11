@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #app {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    @apply bg-surface-0 text-content-primary font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow: hidden;
+  }
+
+  /* Refined, unobtrusive scrollbars to match the macOS aesthetic. */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full;
+    background-color: rgba(255, 255, 255, 0.1);
+    background-clip: padding-box;
+    border: 3px solid transparent;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+    background-clip: padding-box;
+    border: 3px solid transparent;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Container-query helpers: form grids collapse based on their PANE width
+     (not the viewport), so the editor stays usable in a narrow window. */
+  .cq {
+    container-type: inline-size;
+  }
+  .cq-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .cq-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @container (max-width: 560px) {
+    .cq-grid-2,
+    .cq-grid-3 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Tame number input spinners. */
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}

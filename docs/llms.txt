@@ -1,0 +1,35 @@
+# Tailor Studio
+
+> A free, native macOS application for visually building OctoberCMS Tailor
+> blueprints. It replaces hand-written YAML with a three-panel visual editor and
+> generates valid OctoberCMS Tailor blueprint YAML in real time.
+
+Tailor Studio is open source (MIT) and built with Tauri 2, Vue 3, TypeScript and
+Monaco Editor. It is NOT a plugin builder — it focuses exclusively on Tailor
+content blueprints, complementing the official OctoberCMS Builder plugin.
+
+## Key facts
+
+- Platform: macOS (native desktop app)
+- Price: Free and open source (MIT license)
+- Purpose: Visually design OctoberCMS Tailor blueprints and export Tailor YAML
+- Download: https://github.com/kristianvalco/tailor-studio/releases/latest
+- Source: https://github.com/kristianvalco/tailor-studio
+- Homepage: https://kristianvalco.github.io/tailor-studio/
+
+## Features
+
+- Visual blueprint editor (handle, name, type: Single/Structure/Stream/Global, navigation label & icon)
+- 17 field types: Text, Textarea, Markdown, Rich Editor, Number, Date, Switch, Checkbox, Dropdown, Color Picker, Media Finder, File Upload, Code Editor, Repeater, Entries, Section, Partial
+- Drag & drop field ordering
+- Repeater builder with unlimited nesting and breadcrumb navigation
+- Entries relation builder (source blueprint, relation type, display mode, max items)
+- Live, editable YAML via Monaco editor (two-way: UI ↔ YAML)
+- Approximate OctoberCMS backend form preview
+- Multiple projects with local autosave
+- Import, copy, export YAML and save project snapshots
+
+## Who it is for
+
+OctoberCMS developers and agencies who build Tailor-based content models and want
+a fast, visual alternative to writing blueprint YAML files by hand.
