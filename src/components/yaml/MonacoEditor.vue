@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { monaco } from './monaco'
+import { useSettingsStore } from '@/stores/settings'
+
+const settings = useSettingsStore()
+const themeName = computed(() => (settings.isDark ? 'tailor-dark' : 'tailor-light'))
 
 const props = withDefaults(
   defineProps<{ modelValue: string; language?: string; readonly?: boolean }>(),
@@ -17,7 +21,7 @@ onMounted(() => {
   editor = monaco.editor.create(host.value, {
     value: props.modelValue,
     language: props.language,
-    theme: 'tailor-dark',
+    theme: themeName.value,
     readOnly: props.readonly,
     automaticLayout: true,
     minimap: { enabled: false },
@@ -50,6 +54,9 @@ watch(
     suppress = false
   },
 )
+
+// Re-theme Monaco when the app theme changes.
+watch(themeName, (name) => monaco.editor.setTheme(name))
 
 onBeforeUnmount(() => editor?.dispose())
 </script>

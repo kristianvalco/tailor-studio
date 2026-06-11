@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { FieldDefinition, FieldType } from '@/types'
 import { fieldDefinitions } from '@/data/fieldDefinitions'
+import { useFieldI18n } from '@/composables/useFieldI18n'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import Icon from '@/components/ui/Icon.vue'
 
 const emit = defineEmits<{ add: [type: FieldType] }>()
+const { t } = useI18n()
+const { typeLabel, typeDescription, categoryLabel } = useFieldI18n()
 
 const open = ref(false)
 const query = ref('')
 
-const categoryLabels: Record<FieldDefinition['category'], string> = {
+const categoryFallback: Record<FieldDefinition['category'], string> = {
   basic: 'Basic',
   rich: 'Rich content',
   choice: 'Choice',
@@ -22,7 +26,11 @@ const categoryLabels: Record<FieldDefinition['category'], string> = {
 const grouped = computed(() => {
   const q = query.value.trim().toLowerCase()
   const matches = fieldDefinitions.filter(
-    (d) => !q || d.label.toLowerCase().includes(q) || d.description.toLowerCase().includes(q),
+    (d) =>
+      !q ||
+      typeLabel(d).toLowerCase().includes(q) ||
+      typeDescription(d).toLowerCase().includes(q) ||
+      d.label.toLowerCase().includes(q),
   )
   const groups = new Map<FieldDefinition['category'], FieldDefinition[]>()
   for (const def of matches) {
@@ -46,7 +54,7 @@ function close() {
 
 <template>
   <div class="relative">
-    <BaseButton variant="primary" icon="plus" @click="open = !open">Add Field</BaseButton>
+    <BaseButton variant="primary" icon="plus" @click="open = !open">{{ t('editor.addField') }}</BaseButton>
 
     <Transition name="pop">
       <div
@@ -59,7 +67,7 @@ function close() {
             <input
               v-model="query"
               autofocus
-              placeholder="Search field types…"
+              :placeholder="t('addFieldMenu.search')"
               class="h-9 w-full bg-transparent text-[13px] text-content-primary placeholder:text-content-muted focus:outline-none"
             />
           </div>
@@ -68,25 +76,25 @@ function close() {
         <div class="max-h-[60vh] overflow-y-auto p-2">
           <template v-for="[category, defs] in grouped" :key="category">
             <div class="px-2 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-wider text-content-muted">
-              {{ categoryLabels[category] }}
+              {{ categoryLabel(category, categoryFallback[category]) }}
             </div>
             <button
               v-for="def in defs"
               :key="def.type"
-              class="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors hover:bg-white/5"
+              class="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors hover:bg-hover"
               @click="pick(def.type)"
             >
               <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-surface-3 text-accent">
                 <Icon :name="def.icon" :size="16" />
               </span>
               <span class="min-w-0">
-                <span class="block text-[13px] font-medium text-content-primary">{{ def.label }}</span>
-                <span class="block truncate text-[11px] text-content-muted">{{ def.description }}</span>
+                <span class="block text-[13px] font-medium text-content-primary">{{ typeLabel(def) }}</span>
+                <span class="block truncate text-[11px] text-content-muted">{{ typeDescription(def) }}</span>
               </span>
             </button>
           </template>
           <p v-if="!grouped.size" class="px-2 py-6 text-center text-[12px] text-content-muted">
-            No field types match “{{ query }}”.
+            {{ t('addFieldMenu.noMatch', { q: query }) }}
           </p>
         </div>
       </div>

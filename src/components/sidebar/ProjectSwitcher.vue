@@ -1,12 +1,14 @@
 <script setup lang="ts">
 /** Active-project selector with create / rename / duplicate / delete. */
 import { nextTick, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useProjectStore } from '@/stores/projects'
 import { useBlueprintStore } from '@/stores/blueprints'
 import Icon from '@/components/ui/Icon.vue'
 
 const projects = useProjectStore()
 const store = useBlueprintStore()
+const { t } = useI18n()
 
 const open = ref(false)
 const editingId = ref<string | null>(null)
@@ -19,9 +21,10 @@ function switchTo(id: string) {
 }
 
 function create() {
-  store.newProject('New Project')
+  const name = t('projects.defaultNew')
+  store.newProject(name)
   // Drop straight into rename for the freshly created project.
-  startRename(projects.activeProjectId!, 'New Project')
+  startRename(projects.activeProjectId!, name)
 }
 
 async function startRename(id: string, current: string) {
@@ -49,12 +52,12 @@ function remove(id: string) {
 <template>
   <div class="relative">
     <button
-      class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left transition-colors hover:bg-white/5"
+      class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left transition-colors hover:bg-hover"
       @click="open = !open"
     >
       <Icon name="folder" :size="15" class="text-content-muted" />
       <span class="flex-1 truncate text-[12px] font-medium text-content-primary">
-        {{ projects.activeProject?.name ?? 'No project' }}
+        {{ projects.activeProject?.name ?? t('projects.none') }}
       </span>
       <Icon name="chevron-down-up" :size="13" class="text-content-muted" />
     </button>
@@ -65,13 +68,13 @@ function remove(id: string) {
         class="absolute left-0 right-0 top-full z-30 mt-1.5 origin-top rounded-2xl border border-border bg-surface-2/95 p-1.5 shadow-pop backdrop-blur-xl"
       >
         <div class="px-2 pb-1 pt-1 text-[10px] font-semibold uppercase tracking-wider text-content-muted">
-          Projects
+          {{ t('projects.title') }}
         </div>
 
         <div
           v-for="p in projects.projects"
           :key="p.id"
-          class="group flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-white/5"
+          class="group flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-hover"
         >
           <Icon
             name="check"
@@ -94,15 +97,15 @@ function remove(id: string) {
           </button>
 
           <div v-if="editingId !== p.id" class="flex items-center opacity-0 transition-opacity group-hover:opacity-100">
-            <button class="rounded p-1 text-content-muted hover:text-content-primary" title="Rename" @click.stop="startRename(p.id, p.name)">
+            <button class="rounded p-1 text-content-muted hover:text-content-primary" :title="t('projects.rename')" @click.stop="startRename(p.id, p.name)">
               <Icon name="pencil" :size="13" />
             </button>
-            <button class="rounded p-1 text-content-muted hover:text-content-primary" title="Duplicate" @click.stop="projects.duplicateProject(p.id); store.syncSelection()">
+            <button class="rounded p-1 text-content-muted hover:text-content-primary" :title="t('projects.duplicate')" @click.stop="projects.duplicateProject(p.id); store.syncSelection()">
               <Icon name="copy" :size="13" />
             </button>
             <button
               class="rounded p-1 text-content-muted hover:text-red-400 disabled:opacity-30"
-              title="Delete"
+              :title="t('projects.delete')"
               :disabled="projects.projects.length === 1"
               @click.stop="remove(p.id)"
             >
@@ -113,10 +116,10 @@ function remove(id: string) {
 
         <div class="my-1 h-px bg-border-subtle" />
         <button
-          class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left text-[12px] text-content-secondary transition-colors hover:bg-white/5 hover:text-content-primary"
+          class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left text-[12px] text-content-secondary transition-colors hover:bg-hover hover:text-content-primary"
           @click="create"
         >
-          <Icon name="folder-plus" :size="15" /> New project
+          <Icon name="folder-plus" :size="15" /> {{ t('projects.new') }}
         </button>
       </div>
     </Transition>

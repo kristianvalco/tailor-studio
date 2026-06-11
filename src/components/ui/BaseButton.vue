@@ -21,7 +21,7 @@ withDefaults(
       block && 'w-full',
       variant === 'primary' && 'bg-accent text-white hover:bg-accent-hover shadow-sm',
       variant === 'subtle' && 'bg-surface-3 text-content-primary hover:bg-surface-4 border border-border',
-      variant === 'ghost' && 'text-content-secondary hover:text-content-primary hover:bg-white/5',
+      variant === 'ghost' && 'text-content-secondary hover:text-content-primary hover:bg-hover',
       variant === 'danger' && 'text-red-400 hover:bg-red-500/10',
     ]"
   >

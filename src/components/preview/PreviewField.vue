@@ -1,11 +1,13 @@
 <script setup lang="ts">
 /** Renders one field as an approximate OctoberCMS backend form control. */
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { Field, FieldOption } from '@/types'
 import { getFieldDefinition } from '@/data/fieldDefinitions'
 import Icon from '@/components/ui/Icon.vue'
 
 const props = defineProps<{ field: Field }>()
+const { t } = useI18n()
 const def = computed(() => getFieldDefinition(props.field.type))
 const options = computed(() => (props.field.config.options as FieldOption[] | undefined) ?? [])
 </script>
@@ -72,7 +74,7 @@ const options = computed(() => (props.field.config.options as FieldOption[] | un
         v-else-if="field.type === 'dropdown'"
         class="flex h-9 items-center justify-between rounded-lg border border-border bg-surface-1 px-3 text-[12px] text-content-muted"
       >
-        <span>{{ options[0]?.label || 'Select…' }}</span>
+        <span>{{ options[0]?.label || t('preview.select') }}</span>
         <Icon name="chevron-down" :size="14" />
       </div>
 
@@ -82,7 +84,7 @@ const options = computed(() => (props.field.config.options as FieldOption[] | un
         class="flex h-20 flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-border bg-surface-1 text-content-muted"
       >
         <Icon :name="field.type === 'mediafinder' ? 'image' : 'upload'" :size="18" />
-        <span class="text-[11px]">{{ field.type === 'mediafinder' ? 'Choose from library' : 'Upload file' }}</span>
+        <span class="text-[11px]">{{ field.type === 'mediafinder' ? t('preview.chooseLibrary') : t('preview.uploadFile') }}</span>
       </div>
 
       <!-- Entries -->
@@ -108,7 +110,7 @@ const options = computed(() => (props.field.config.options as FieldOption[] | un
           </div>
         </div>
         <div class="mt-2 flex items-center gap-1 text-[11px] text-accent">
-          <Icon name="plus" :size="12" /> {{ (field.config.prompt as string) || 'Add item' }}
+          <Icon name="plus" :size="12" /> {{ (field.config.prompt as string) || t('preview.addItem') }}
         </div>
       </div>
 

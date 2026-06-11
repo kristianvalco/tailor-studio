@@ -1,6 +1,6 @@
 {
   "name": "tailor-studio",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A visual builder for OctoberCMS Tailor blueprints",
   "type": "module",
   "private": true,
@@ -22,6 +22,7 @@
     "nanoid": "^5.0.9",
     "pinia": "^2.3.0",
     "vue": "^3.5.13",
+    "vue-i18n": "9",
     "vuedraggable": "^4.1.0"
   },
   "pnpm": {

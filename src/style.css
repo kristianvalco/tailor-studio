@@ -3,8 +3,43 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light theme (default). Toggled to dark by adding `.dark` on <html>. */
   :root {
+    color-scheme: light;
+    --c-surface-0: 235 235 239;
+    --c-surface-1: 246 246 248;
+    --c-surface-2: 255 255 255;
+    --c-surface-3: 241 241 245;
+    --c-surface-4: 230 230 236;
+    --c-content-primary: 26 26 34;
+    --c-content-secondary: 84 84 106;
+    --c-content-muted: 138 138 154;
+    --c-accent: 99 102 241;
+    --c-accent-hover: 79 70 229;
+    --c-border-subtle: rgba(0, 0, 0, 0.06);
+    --c-border: rgba(0, 0, 0, 0.1);
+    --c-border-strong: rgba(0, 0, 0, 0.16);
+    --c-accent-soft: rgba(99, 102, 241, 0.12);
+    --c-hover: rgba(0, 0, 0, 0.045);
+  }
+
+  .dark {
     color-scheme: dark;
+    --c-surface-0: 11 11 15;
+    --c-surface-1: 18 18 24;
+    --c-surface-2: 23 23 31;
+    --c-surface-3: 30 30 40;
+    --c-surface-4: 38 38 51;
+    --c-content-primary: 244 244 246;
+    --c-content-secondary: 163 163 178;
+    --c-content-muted: 110 110 128;
+    --c-accent: 99 102 241;
+    --c-accent-hover: 124 127 245;
+    --c-border-subtle: rgba(255, 255, 255, 0.06);
+    --c-border: rgba(255, 255, 255, 0.09);
+    --c-border-strong: rgba(255, 255, 255, 0.14);
+    --c-accent-soft: rgba(99, 102, 241, 0.14);
+    --c-hover: rgba(255, 255, 255, 0.05);
   }
 
   html,

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useUiStore, type RightTab } from '@/stores/ui'
 import { useProjectIO } from '@/composables/useProjectIO'
 import PreviewPanel from '@/components/preview/PreviewPanel.vue'
@@ -7,11 +9,12 @@ import Icon from '@/components/ui/Icon.vue'
 
 const ui = useUiStore()
 const io = useProjectIO()
+const { t } = useI18n()
 
-const tabs: { id: RightTab; label: string; icon: string }[] = [
-  { id: 'preview', label: 'Preview', icon: 'box' },
-  { id: 'yaml', label: 'YAML', icon: 'file-code' },
-]
+const tabs = computed<{ id: RightTab; label: string; icon: string }[]>(() => [
+  { id: 'preview', label: t('right.preview'), icon: 'box' },
+  { id: 'yaml', label: t('right.yaml'), icon: 'file-code' },
+])
 </script>
 
 <template>
@@ -32,16 +35,16 @@ const tabs: { id: RightTab; label: string; icon: string }[] = [
       </div>
 
       <div class="ml-auto flex items-center gap-1">
-        <button class="io-btn" title="Import YAML" @click="io.importYaml()">
+        <button class="io-btn" :title="t('right.import')" @click="io.importYaml()">
           <Icon name="file-down" :size="15" />
         </button>
-        <button class="io-btn" title="Copy YAML" @click="io.copyYaml()">
+        <button class="io-btn" :title="t('right.copy')" @click="io.copyYaml()">
           <Icon name="copy" :size="15" />
         </button>
-        <button class="io-btn" title="Export YAML" @click="io.exportYaml()">
+        <button class="io-btn" :title="t('right.export')" @click="io.exportYaml()">
           <Icon name="download" :size="15" />
         </button>
-        <button class="io-btn" title="Save project" @click="io.saveProject()">
+        <button class="io-btn" :title="t('right.save')" @click="io.saveProject()">
           <Icon name="save" :size="15" />
         </button>
       </div>
@@ -59,6 +62,6 @@ const tabs: { id: RightTab; label: string; icon: string }[] = [
 
 <style scoped>
 .io-btn {
-  @apply flex h-8 w-8 items-center justify-center rounded-lg text-content-muted transition-colors hover:bg-white/5 hover:text-content-primary;
+  @apply flex h-8 w-8 items-center justify-center rounded-lg text-content-muted transition-colors hover:bg-hover hover:text-content-primary;
 }
 </style>

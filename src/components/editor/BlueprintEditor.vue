@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useBlueprintStore } from '@/stores/blueprints'
 import { getFieldDefinition } from '@/data/fieldDefinitions'
 import GeneralSettings from './GeneralSettings.vue'
@@ -7,17 +8,12 @@ import FieldsSection from './FieldsSection.vue'
 import Icon from '@/components/ui/Icon.vue'
 
 const store = useBlueprintStore()
+const { t } = useI18n()
 const blueprint = computed(() => store.selectedBlueprint)
 
-const typeBadge = computed(() => {
-  switch (blueprint.value?.type) {
-    case 'single': return 'Single'
-    case 'structure': return 'Structure'
-    case 'stream': return 'Stream'
-    case 'global': return 'Global'
-    default: return ''
-  }
-})
+const typeBadge = computed(() =>
+  blueprint.value ? t(`blueprintTypes.${blueprint.value.type}`) : '',
+)
 
 const navIcon = computed(() => {
   // Map an entered field type to an editor icon if it happens to match.
@@ -57,6 +53,6 @@ const navIcon = computed(() => {
   <!-- No selection -->
   <div v-else class="flex h-full flex-col items-center justify-center gap-3 text-content-muted">
     <Icon name="box" :size="40" :stroke-width="1.5" />
-    <p class="text-[13px]">Select a blueprint or create a new one.</p>
+    <p class="text-[13px]">{{ t('editor.selectPrompt') }}</p>
   </div>
 </template>

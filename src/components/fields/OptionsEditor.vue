@@ -1,5 +1,6 @@
 <script setup lang="ts">
 /** Editor for dropdown-style `options` (value/label pairs). */
+import { useI18n } from 'vue-i18n'
 import type { FieldOption } from '@/types'
 import { createId } from '@/utils/id'
 import { slugifyFieldHandle } from '@/utils/handle'
@@ -7,6 +8,7 @@ import BaseInput from '@/components/ui/BaseInput.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import Icon from '@/components/ui/Icon.vue'
 
+const { t } = useI18n()
 const props = defineProps<{ modelValue: FieldOption[] | undefined }>()
 const emit = defineEmits<{ 'update:modelValue': [value: FieldOption[]] }>()
 
@@ -45,14 +47,14 @@ function setValue(opt: FieldOption, value: string) {
     >
       <BaseInput
         :model-value="opt.value"
-        placeholder="value"
+        :placeholder="t('optionsEditor.value')"
         mono
         class="flex-1"
         @update:model-value="(v) => setValue(opt, v)"
       />
       <BaseInput
         :model-value="opt.label"
-        placeholder="Label"
+        :placeholder="t('optionsEditor.label')"
         class="flex-1"
         @update:model-value="(v) => setLabel(opt, v)"
       />
@@ -63,6 +65,6 @@ function setValue(opt: FieldOption, value: string) {
         <Icon name="x" :size="14" />
       </button>
     </div>
-    <BaseButton size="sm" variant="ghost" icon="plus" @click="add">Add option</BaseButton>
+    <BaseButton size="sm" variant="ghost" icon="plus" @click="add">{{ t('optionsEditor.addOption') }}</BaseButton>
   </div>
 </template>

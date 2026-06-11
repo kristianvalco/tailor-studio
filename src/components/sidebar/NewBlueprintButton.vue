@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { BlueprintType } from '@/types'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import Icon from '@/components/ui/Icon.vue'
 
 const emit = defineEmits<{ create: [type: BlueprintType] }>()
+const { t } = useI18n()
 const open = ref(false)
 
-const types: { value: BlueprintType; label: string; icon: string; hint: string }[] = [
-  { value: 'single', label: 'Single', icon: 'box', hint: 'One standalone record' },
-  { value: 'structure', label: 'Structure', icon: 'layers', hint: 'Nested tree of entries' },
-  { value: 'stream', label: 'Stream', icon: 'text', hint: 'Flat, dated list' },
-  { value: 'global', label: 'Global', icon: 'settings', hint: 'Site-wide settings' },
-]
+const types = computed<{ value: BlueprintType; label: string; icon: string; hint: string }[]>(() => [
+  { value: 'single', label: t('blueprintTypes.single'), icon: 'box', hint: t('blueprintTypeHints.single') },
+  { value: 'structure', label: t('blueprintTypes.structure'), icon: 'layers', hint: t('blueprintTypeHints.structure') },
+  { value: 'stream', label: t('blueprintTypes.stream'), icon: 'text', hint: t('blueprintTypeHints.stream') },
+  { value: 'global', label: t('blueprintTypes.global'), icon: 'settings', hint: t('blueprintTypeHints.global') },
+])
 
 function create(type: BlueprintType) {
   emit('create', type)
@@ -22,7 +24,7 @@ function create(type: BlueprintType) {
 
 <template>
   <div class="relative">
-    <BaseButton variant="subtle" icon="plus" block @click="open = !open">New Blueprint</BaseButton>
+    <BaseButton variant="subtle" icon="plus" block @click="open = !open">{{ t('sidebar.newBlueprint') }}</BaseButton>
 
     <Transition name="pop">
       <div
@@ -32,7 +34,7 @@ function create(type: BlueprintType) {
         <button
           v-for="t in types"
           :key="t.value"
-          class="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors hover:bg-white/5"
+          class="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors hover:bg-hover"
           @click="create(t.value)"
         >
           <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-surface-3 text-accent">

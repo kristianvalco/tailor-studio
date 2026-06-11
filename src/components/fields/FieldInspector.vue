@@ -4,9 +4,11 @@
  * registry definition. Writes straight into `field.config` (reactive).
  */
 import { computed } from 'vue'
-import type { Field, FieldOption } from '@/types'
+import { useI18n } from 'vue-i18n'
+import type { Field, FieldOption, FieldOptionControl } from '@/types'
 import { getFieldDefinition } from '@/data/fieldDefinitions'
 import { useBlueprintStore } from '@/stores/blueprints'
+import { useFieldI18n } from '@/composables/useFieldI18n'
 import FormRow from '@/components/ui/FormRow.vue'
 import BaseInput from '@/components/ui/BaseInput.vue'
 import BaseTextarea from '@/components/ui/BaseTextarea.vue'
@@ -16,8 +18,15 @@ import OptionsEditor from './OptionsEditor.vue'
 
 const props = defineProps<{ field: Field }>()
 
+const { t } = useI18n()
+const { optionLabel, choiceLabel } = useFieldI18n()
 const store = useBlueprintStore()
 const definition = computed(() => getFieldDefinition(props.field.type))
+
+/** Translate a control's select choices (falls back to registry labels). */
+function localizedChoices(ctrl: FieldOptionControl) {
+  return (ctrl.choices ?? []).map((c) => ({ value: c.value, label: choiceLabel(c.value, c.label) }))
+}
 
 /** Other blueprints offered as Entries relation sources (by handle). */
 const blueprintChoices = computed(() =>
@@ -44,7 +53,7 @@ function numberOrUndefined(v: string): number | undefined {
         <!-- Switch sits inline with its label -->
         <FormRow
           v-if="ctrl.control === 'switch'"
-          :label="ctrl.label"
+          :label="optionLabel(ctrl)"
           :help="ctrl.help"
           inline
         >
@@ -54,7 +63,7 @@ function numberOrUndefined(v: string): number | undefined {
           />
         </FormRow>
 
-        <FormRow v-else :label="ctrl.label" :help="ctrl.help">
+        <FormRow v-else :label="optionLabel(ctrl)" :help="ctrl.help">
           <BaseInput
             v-if="ctrl.control === 'text'"
             :model-value="field.config[ctrl.key] as string"
@@ -77,14 +86,14 @@ function numberOrUndefined(v: string): number | undefined {
           <BaseSelect
             v-else-if="ctrl.control === 'select'"
             :model-value="field.config[ctrl.key] as string"
-            :options="ctrl.choices ?? []"
+            :options="localizedChoices(ctrl)"
             @update:model-value="(v) => set(ctrl.key, v)"
           />
           <BaseSelect
             v-else-if="ctrl.control === 'blueprint'"
             :model-value="field.config[ctrl.key] as string"
             :options="blueprintChoices"
-            placeholder="Select a blueprint…"
+            :placeholder="t('preview.select')"
             @update:model-value="(v) => set(ctrl.key, v)"
           />
           <OptionsEditor

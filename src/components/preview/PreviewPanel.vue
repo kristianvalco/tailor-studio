@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { Field } from '@/types'
 import { useBlueprintStore } from '@/stores/blueprints'
 import PreviewField from './PreviewField.vue'
 import Icon from '@/components/ui/Icon.vue'
 
 const store = useBlueprintStore()
+const { t } = useI18n()
 const blueprint = computed(() => store.selectedBlueprint)
 
 /** Group fields by their `tab` to mimic the backend's tabbed form. */
@@ -35,7 +37,7 @@ function spanClass(field: Field): string {
         <div class="flex items-center gap-2 border-b border-border-subtle px-4 py-3">
           <Icon name="box" :size="15" class="text-accent" />
           <span class="text-[13px] font-semibold text-content-primary">{{ blueprint.name || 'Untitled' }}</span>
-          <span class="ml-auto text-[11px] text-content-muted">OctoberCMS · Backend preview</span>
+          <span class="ml-auto text-[11px] text-content-muted">{{ t('preview.backend') }}</span>
         </div>
 
         <div v-for="[tab, fields] in tabs" :key="tab" class="px-5 py-4">
@@ -50,13 +52,13 @@ function spanClass(field: Field): string {
         </div>
 
         <div v-if="!blueprint.fields.length" class="px-5 py-10 text-center text-[12px] text-content-muted">
-          Add fields to see the form preview.
+          {{ t('preview.addFields') }}
         </div>
       </div>
     </div>
   </div>
 
   <div v-else class="flex h-full items-center justify-center text-[13px] text-content-muted">
-    Nothing to preview.
+    {{ t('preview.nothing') }}
   </div>
 </template>

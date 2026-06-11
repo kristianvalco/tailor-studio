@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { BlueprintType } from '@/types'
 import { useBlueprintStore } from '@/stores/blueprints'
+import { useUiStore } from '@/stores/ui'
 import BlueprintTreeItem from './BlueprintTreeItem.vue'
 import NewBlueprintButton from './NewBlueprintButton.vue'
 import ProjectSwitcher from './ProjectSwitcher.vue'
 import Icon from '@/components/ui/Icon.vue'
 
 const store = useBlueprintStore()
+const ui = useUiStore()
+const { t } = useI18n()
 const query = ref('')
 
 const filtered = computed(() => {
@@ -32,10 +36,17 @@ function create(type: BlueprintType) {
       <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-white">
         <Icon name="layers" :size="16" />
       </div>
-      <div>
+      <div class="flex-1">
         <div class="text-[13px] font-semibold leading-tight text-content-primary">Tailor Studio</div>
-        <div class="text-[10px] text-content-muted">Blueprint builder</div>
+        <div class="text-[10px] text-content-muted">{{ t('app.tagline') }}</div>
       </div>
+      <button
+        class="rounded-lg p-1.5 text-content-muted transition-colors hover:bg-hover hover:text-content-primary"
+        :title="t('settings.open')"
+        @click="ui.openSettings()"
+      >
+        <Icon name="settings" :size="16" />
+      </button>
     </div>
 
     <!-- Project switcher -->
@@ -49,7 +60,7 @@ function create(type: BlueprintType) {
         <Icon name="search" :size="14" class="text-content-muted" />
         <input
           v-model="query"
-          placeholder="Search blueprints…"
+          :placeholder="t('sidebar.search')"
           class="h-8 w-full bg-transparent text-[12px] text-content-primary placeholder:text-content-muted focus:outline-none"
         />
       </div>
@@ -58,7 +69,7 @@ function create(type: BlueprintType) {
     <!-- Tree -->
     <nav class="min-h-0 flex-1 overflow-y-auto px-2 pb-2">
       <div class="px-2 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-wider text-content-muted">
-        Collections
+        {{ t('sidebar.collections') }}
       </div>
       <BlueprintTreeItem
         v-for="bp in collections"
@@ -68,11 +79,11 @@ function create(type: BlueprintType) {
         @select="store.selectBlueprint(bp.id)"
         @delete="store.deleteBlueprint(bp.id)"
       />
-      <p v-if="!collections.length" class="px-2 py-3 text-[12px] text-content-muted">No collections.</p>
+      <p v-if="!collections.length" class="px-2 py-3 text-[12px] text-content-muted">{{ t('sidebar.noCollections') }}</p>
 
       <template v-if="globals.length">
         <div class="px-2 pb-1 pt-4 text-[10px] font-semibold uppercase tracking-wider text-content-muted">
-          Global Settings
+          {{ t('sidebar.globalSettings') }}
         </div>
         <BlueprintTreeItem
           v-for="bp in globals"

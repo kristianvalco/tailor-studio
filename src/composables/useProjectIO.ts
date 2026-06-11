@@ -7,6 +7,7 @@ import { useBlueprintStore } from '@/stores/blueprints'
 import { useProjectStore } from '@/stores/projects'
 import { useUiStore } from '@/stores/ui'
 import { generateYaml } from '@/generator/yamlGenerator'
+import { t } from '@/i18n'
 
 function isTauri(): boolean {
   return typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window
@@ -22,9 +23,9 @@ export function useProjectIO() {
     if (!yaml) return
     try {
       await navigator.clipboard.writeText(yaml)
-      ui.notify('YAML copied to clipboard', 'success')
+      ui.notify(t('toast.copied'), 'success')
     } catch {
-      ui.notify('Could not access the clipboard', 'error')
+      ui.notify(t('toast.clipboardFail'), 'error')
     }
   }
 
@@ -44,12 +45,12 @@ export function useProjectIO() {
       const path = await save({ defaultPath: suggestedName(), filters: [{ name: 'YAML', extensions: ['yaml', 'yml'] }] })
       if (!path) return
       await writeTextFile(path, yaml)
-      ui.notify('Blueprint exported', 'success')
+      ui.notify(t('toast.exported'), 'success')
       return
     }
 
     downloadBlob(yaml, suggestedName())
-    ui.notify('Blueprint downloaded', 'success')
+    ui.notify(t('toast.downloaded'), 'success')
   }
 
   async function importYaml() {
@@ -67,7 +68,7 @@ export function useProjectIO() {
 
   function applyImport(text: string) {
     const error = store.importYaml(text)
-    ui.notify(error ?? 'Blueprint imported', error ? 'error' : 'success')
+    ui.notify(error ?? t('toast.imported'), error ? 'error' : 'success')
   }
 
   async function saveProject() {
@@ -82,11 +83,11 @@ export function useProjectIO() {
       const path = await save({ defaultPath: filename, filters: [{ name: 'JSON', extensions: ['json'] }] })
       if (!path) return
       await writeTextFile(path, snapshot)
-      ui.notify('Project saved', 'success')
+      ui.notify(t('toast.projectSaved'), 'success')
       return
     }
     downloadBlob(snapshot, filename)
-    ui.notify('Project saved', 'success')
+    ui.notify(t('toast.projectSaved'), 'success')
   }
 
   return { copyYaml, exportYaml, importYaml, saveProject }

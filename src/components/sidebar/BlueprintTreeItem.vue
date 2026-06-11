@@ -16,7 +16,7 @@ const typeIcon: Record<string, string> = {
 <template>
   <div
     class="group flex cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors"
-    :class="active ? 'bg-accent-soft text-content-primary' : 'text-content-secondary hover:bg-white/5 hover:text-content-primary'"
+    :class="active ? 'bg-accent-soft text-content-primary' : 'text-content-secondary hover:bg-hover hover:text-content-primary'"
     @click="emit('select')"
   >
     <Icon

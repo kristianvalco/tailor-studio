@@ -5,29 +5,32 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Surface scale — tuned for a deep, calm macOS dark UI.
+        // Theme-aware tokens driven by CSS variables (see style.css :root / .dark).
+        // RGB-channel vars support Tailwind opacity modifiers (e.g. bg-surface-3/90).
         surface: {
-          0: '#0b0b0f',
-          1: '#121218',
-          2: '#17171f',
-          3: '#1e1e28',
-          4: '#262633',
+          0: 'rgb(var(--c-surface-0) / <alpha-value>)',
+          1: 'rgb(var(--c-surface-1) / <alpha-value>)',
+          2: 'rgb(var(--c-surface-2) / <alpha-value>)',
+          3: 'rgb(var(--c-surface-3) / <alpha-value>)',
+          4: 'rgb(var(--c-surface-4) / <alpha-value>)',
         },
         border: {
-          subtle: 'rgba(255,255,255,0.06)',
-          DEFAULT: 'rgba(255,255,255,0.09)',
-          strong: 'rgba(255,255,255,0.14)',
+          subtle: 'var(--c-border-subtle)',
+          DEFAULT: 'var(--c-border)',
+          strong: 'var(--c-border-strong)',
         },
         accent: {
-          DEFAULT: '#6366f1',
-          soft: 'rgba(99,102,241,0.14)',
-          hover: '#7c7ff5',
+          DEFAULT: 'rgb(var(--c-accent) / <alpha-value>)',
+          soft: 'var(--c-accent-soft)',
+          hover: 'rgb(var(--c-accent-hover) / <alpha-value>)',
         },
         content: {
-          primary: '#f4f4f6',
-          secondary: '#a3a3b2',
-          muted: '#6e6e80',
+          primary: 'rgb(var(--c-content-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--c-content-secondary) / <alpha-value>)',
+          muted: 'rgb(var(--c-content-muted) / <alpha-value>)',
         },
+        // Neutral hover wash that adapts to the theme.
+        hover: 'var(--c-hover)',
       },
       fontFamily: {
         sans: [
