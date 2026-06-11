@@ -71,6 +71,14 @@ const locales: { value: Locale; label: string; flag: string }[] = [
               </button>
             </div>
           </div>
+
+          <!-- About -->
+          <div class="border-t border-border-subtle pt-4 text-[12px] text-content-muted">
+            Created by
+            <a href="https://kristianvalco.sk" target="_blank" rel="noopener" class="font-medium text-content-secondary transition-colors hover:text-accent">Kristián Valčo</a>
+            ·
+            <a href="https://kristianvalco.sk" target="_blank" rel="noopener" class="text-accent transition-colors hover:text-accent-hover">kristianvalco.sk</a>
+          </div>
         </div>
 
         <div class="flex justify-end border-t border-border-subtle px-5 py-3">
