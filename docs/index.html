@@ -119,6 +119,10 @@
   .nav-links a:hover{color:var(--fg)}
 
   section{padding:88px 0}
+  /* `.wrap` (class) sets horizontal padding and would otherwise beat the
+     element-level `section` rule, zeroing vertical spacing — restore it with a
+     higher-specificity rule so sections keep their gaps. */
+  section.wrap:not(.hero){padding-block:88px}
   .hero{padding:84px 0 56px;text-align:center}
   .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:var(--accent-soft);border:1px solid rgba(99,102,241,.3);color:#c7c8ff;font-size:13px;font-weight:600;margin-bottom:26px}
   h1{font-size:clamp(34px,5.5vw,58px);line-height:1.06;letter-spacing:-.02em;font-weight:800;max-width:18ch;margin:0 auto}
@@ -184,7 +188,7 @@
       <a href="#faq">FAQ</a>
       <a href="https://github.com/kristianvalco/tailor-studio">GitHub</a>
     </nav>
-    <a class="btn btn-primary" href="https://github.com/kristianvalco/tailor-studio/releases/latest">Download</a>
+    <a class="btn btn-primary" href="https://github.com/kristianvalco/tailor-studio/releases/latest" onclick="tsDownload(event)">Download</a>
   </div>
 </header>
 
@@ -194,7 +198,7 @@
   <h1>Build <span class="grad">OctoberCMS Tailor</span> blueprints visually</h1>
   <p class="lead">Tailor Studio is a native macOS app that turns Tailor blueprint design into a fast, visual workflow. Drag fields, nest repeaters, wire relations — and export clean, valid Tailor YAML in real time. No more hand-writing YAML.</p>
   <div class="cta">
-    <a class="btn btn-primary" href="https://github.com/kristianvalco/tailor-studio/releases/latest">↓ Download</a>
+    <a class="btn btn-primary" href="https://github.com/kristianvalco/tailor-studio/releases/latest" onclick="tsDownload(event)">↓ Download</a>
     <a class="btn btn-ghost" href="https://github.com/kristianvalco/tailor-studio">View on GitHub</a>
   </div>
   <p class="sub-note">macOS (Apple Silicon &amp; Intel) · Windows · Linux — pick your installer on the releases page</p>
@@ -260,10 +264,38 @@
   <div class="final">
     <h2>Stop writing Tailor YAML by hand</h2>
     <p class="section-lead">Design your OctoberCMS content schemas visually and ship them in minutes.</p>
-    <div class="cta"><a class="btn btn-primary" href="https://github.com/kristianvalco/tailor-studio/releases/latest">↓ Download for macOS, Windows or Linux</a></div>
+    <div class="cta"><a class="btn btn-primary" href="https://github.com/kristianvalco/tailor-studio/releases/latest" onclick="tsDownload(event)">↓ Download for macOS, Windows or Linux</a></div>
   </div>
 </section>
 </main>
+
+<script>
+  // Direct download: detect the OS and jump straight to the matching asset from
+  // the latest GitHub release. Falls back to the releases page on any failure.
+  async function tsDownload(e) {
+    if (e) e.preventDefault()
+    var repo = 'kristianvalco/tailor-studio'
+    var fallback = 'https://github.com/' + repo + '/releases/latest'
+    try {
+      var ua = navigator.userAgent
+      var res = await fetch('https://api.github.com/repos/' + repo + '/releases/latest')
+      if (!res.ok) throw new Error('api')
+      var data = await res.json()
+      var assets = data.assets || []
+      var find = function (re) {
+        var a = assets.find(function (x) { return re.test(x.name) })
+        return a && a.browser_download_url
+      }
+      var url
+      if (/Windows/.test(ua)) url = find(/-setup\.exe$/i) || find(/\.exe$/i) || find(/\.msi$/i)
+      else if (/Mac|Macintosh/.test(ua)) url = find(/aarch64\.dmg$/i) || find(/\.dmg$/i)
+      else if (/Linux|X11/.test(ua)) url = find(/\.AppImage$/i) || find(/\.deb$/i)
+      window.location.href = url || fallback
+    } catch (_) {
+      window.location.href = fallback
+    }
+  }
+</script>
 
 <footer>
   <div class="wrap foot-inner">
