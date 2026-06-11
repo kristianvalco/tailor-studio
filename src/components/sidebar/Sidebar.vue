@@ -26,13 +26,21 @@ const globals = computed(() => filtered.value.filter((b) => b.type === 'global')
 
 function create(type: BlueprintType) {
   store.addBlueprint(type)
+  // On the single-pane mobile layout, jump straight into the new blueprint.
+  ui.setMobileView('editor')
+}
+
+function selectBlueprint(id: string) {
+  store.selectBlueprint(id)
+  // On mobile, picking a blueprint should reveal the editor pane.
+  ui.setMobileView('editor')
 }
 </script>
 
 <template>
-  <aside class="flex h-full w-64 flex-col border-r border-border-subtle bg-surface-1">
+  <aside class="flex h-full w-full flex-col border-r border-border-subtle bg-surface-1 lg:w-64">
     <!-- Brand (drag handle; top padding clears the macOS traffic lights) -->
-    <div data-tauri-drag-region class="flex items-center gap-2.5 px-4 pb-3 pt-9">
+    <div data-tauri-drag-region class="flex items-center gap-2.5 px-4 pb-3 pt-4 lg:pt-9">
       <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-white">
         <Icon name="layers" :size="16" />
       </div>
@@ -76,7 +84,7 @@ function create(type: BlueprintType) {
         :key="bp.id"
         :blueprint="bp"
         :active="bp.id === store.selectedBlueprintId"
-        @select="store.selectBlueprint(bp.id)"
+        @select="selectBlueprint(bp.id)"
         @delete="store.deleteBlueprint(bp.id)"
       />
       <p v-if="!collections.length" class="px-2 py-3 text-[12px] text-content-muted">{{ t('sidebar.noCollections') }}</p>
@@ -90,7 +98,7 @@ function create(type: BlueprintType) {
           :key="bp.id"
           :blueprint="bp"
           :active="bp.id === store.selectedBlueprintId"
-          @select="store.selectBlueprint(bp.id)"
+          @select="selectBlueprint(bp.id)"
           @delete="store.deleteBlueprint(bp.id)"
         />
       </template>

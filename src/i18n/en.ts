@@ -2,6 +2,7 @@
  *  fall back to the registry, so they are not duplicated here. */
 export default {
   app: { tagline: 'Blueprint builder' },
+  nav: { blueprints: 'Blueprints', editor: 'Editor', preview: 'Preview' },
   sidebar: {
     search: 'Search blueprints…',
     collections: 'Collections',

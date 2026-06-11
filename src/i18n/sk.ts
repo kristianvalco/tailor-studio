@@ -2,6 +2,7 @@
  *  English takes from the registry. */
 export default {
   app: { tagline: 'Tvorba blueprintov' },
+  nav: { blueprints: 'Blueprinty', editor: 'Editor', preview: 'Náhľad' },
   sidebar: {
     search: 'Hľadať blueprinty…',
     collections: 'Kolekcie',

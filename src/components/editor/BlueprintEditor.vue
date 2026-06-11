@@ -25,7 +25,7 @@ const navIcon = computed(() => {
 <template>
   <div v-if="blueprint" class="flex h-full flex-col">
     <!-- Editor header (also a window drag handle) -->
-    <header data-tauri-drag-region class="flex items-center gap-3 border-b border-border-subtle px-6 py-4">
+    <header data-tauri-drag-region class="flex items-center gap-3 border-b border-border-subtle px-4 py-4 sm:px-6">
       <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent">
         <Icon :name="navIcon" :size="18" />
       </div>
@@ -41,7 +41,7 @@ const navIcon = computed(() => {
     </header>
 
     <!-- Scrollable body -->
-    <div class="cq min-h-0 flex-1 overflow-y-auto px-6 py-6">
+    <div class="cq min-h-0 flex-1 overflow-y-auto px-4 py-6 sm:px-6">
       <div class="mx-auto max-w-2xl space-y-8">
         <GeneralSettings :blueprint="blueprint" />
         <div class="h-px bg-border-subtle" />
