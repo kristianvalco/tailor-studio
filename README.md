@@ -26,8 +26,10 @@ convention-following YAML — no hand-written blueprints, no admin-panel feel.
 - 📄 **Live YAML** — Monaco editor generates valid OctoberCMS Tailor YAML in real time; edit the YAML and it parses back into the UI.
 - 👁 **Backend preview** — an approximate OctoberCMS backend form rendered from your fields.
 - 🗂 **Multiple projects** — create, rename, duplicate and switch between projects; everything auto-saves locally.
+- 🎨 **Visual icon picker** — searchable grid of rendered OctoberCMS navigation icons.
+- 🌓 **Themes & languages** — Dark / Light / System theme and English / Slovak (Slovenčina), switchable in Settings.
 - 📥 **Import / Copy / Export / Save** — round-trip existing blueprints and export project snapshots.
-- 🌙 **Native macOS dark UI** — inspired by Raycast, Linear and Arc.
+- 🖥 **Cross-platform** — native builds for macOS, Windows and Linux. Inspired by Raycast, Linear and Arc.
 
 ## Screenshots
 
@@ -37,12 +39,17 @@ convention-following YAML — no hand-written blueprints, no admin-panel feel.
 
 ## Download
 
-Grab the latest `.dmg` from the [**Releases**](../../releases/latest) page.
+Grab the latest installer for your platform from the [**Releases**](../../releases/latest) page:
 
-> The app is currently **unsigned** (no paid Apple Developer certificate yet). On
-> first launch macOS Gatekeeper will warn you. To open it:
-> **right-click the app → Open → Open**, or run
-> `xattr -dr com.apple.quarantine "/Applications/Tailor Studio.app"`.
+- **macOS** — `.dmg` (Apple Silicon `_aarch64` and Intel `_x64`)
+- **Windows** — `-setup.exe` or `.msi`
+- **Linux** — `.AppImage` or `.deb`
+
+Cross-platform builds are produced automatically by GitHub Actions on every tag.
+
+> macOS builds are currently **unsigned** (no paid Apple Developer certificate yet).
+> On first launch Gatekeeper will warn you — **right-click the app → Open → Open**,
+> or run `xattr -dr com.apple.quarantine "/Applications/Tailor Studio.app"`.
 
 ## Tech stack
 
