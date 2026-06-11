@@ -5,6 +5,7 @@ import BlueprintEditor from '@/components/editor/BlueprintEditor.vue'
 import RightPanel from '@/components/layout/RightPanel.vue'
 import Toast from '@/components/layout/Toast.vue'
 import SettingsModal from '@/components/layout/SettingsModal.vue'
+import TemplatesModal from '@/components/templates/TemplatesModal.vue'
 
 // Right panel is resizable; invert so dragging left widens it.
 const { size: rightWidth, startResize } = useResizable(440, 340, 760, { invert: true })
@@ -35,5 +36,6 @@ const { size: rightWidth, startResize } = useResizable(440, 340, 760, { invert: 
 
     <Toast />
     <SettingsModal />
+    <TemplatesModal />
   </div>
 </template>

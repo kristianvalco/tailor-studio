@@ -103,6 +103,25 @@ export default {
   },
   iconPicker: { search: 'Hľadať ikony…', placeholder: 'Vyber ikonu', clear: 'Zmazať', noMatch: 'Žiadne ikony' },
   optionsEditor: { value: 'hodnota', label: 'Popis', addOption: 'Pridať možnosť' },
+  templates: {
+    open: 'Šablóny',
+    title: 'Začni zo šablóny',
+    subtitle: 'Vyber hotový blueprint a uprav si ho podľa seba.',
+  },
+  templateCategories: { content: 'Obsah', commerce: 'E-shop', settings: 'Nastavenia' },
+  template: {
+    'blog-post': { name: 'Blogový článok', description: 'Článok s obsahom, obrázkom, kategóriami a dátumom' },
+    'blog-category': { name: 'Kategória blogu', description: 'Jednoduchá kategória s názvom, slugom a popisom' },
+    page: { name: 'Stránka', description: 'Bežná obsahová stránka s telom a SEO' },
+    faq: { name: 'FAQ položka', description: 'Dvojica otázka a odpoveď' },
+    'team-member': { name: 'Člen tímu', description: 'Osoba s fotkou, rolou, biom a sociálnymi sieťami' },
+    testimonial: { name: 'Referencia', description: 'Citát zákazníka s autorom a hodnotením' },
+    product: { name: 'Produkt', description: 'Produkt s cenou, galériou a kategóriami' },
+    'site-settings': { name: 'Nastavenia webu', description: 'Globálny názov, logo, farby a popis webu' },
+    'social-networks': { name: 'Sociálne siete', description: 'Globálny zoznam profilov na sociálnych sieťach' },
+    'contact-info': { name: 'Kontaktné údaje', description: 'Globálny email, telefón a adresa' },
+    'seo-defaults': { name: 'SEO predvolené', description: 'Predvolený meta titulok, popis a OG obrázok' },
+  },
 
   // Field-type labels & descriptions (EN versions come from the registry).
   fieldType: {

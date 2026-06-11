@@ -103,4 +103,10 @@ export default {
   },
   iconPicker: { search: 'Search icons…', placeholder: 'Pick an icon', clear: 'Clear', noMatch: 'No icons found' },
   optionsEditor: { value: 'value', label: 'Label', addOption: 'Add option' },
+  templates: {
+    open: 'Templates',
+    title: 'Start from a template',
+    subtitle: 'Pick a ready-made blueprint and tweak it to fit.',
+  },
+  templateCategories: { content: 'Content', commerce: 'Commerce', settings: 'Settings' },
 }

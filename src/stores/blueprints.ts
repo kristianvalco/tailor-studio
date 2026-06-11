@@ -12,6 +12,7 @@ import { generateYaml } from '@/generator/yamlGenerator'
 import { parseYaml } from '@/parser/yamlParser'
 import { createId } from '@/utils/id'
 import { useProjectStore } from '@/stores/projects'
+import type { BlueprintTemplate } from '@/data/templates'
 
 interface State {
   selectedBlueprintId: string | null
@@ -108,6 +109,20 @@ export const useBlueprintStore = defineStore('blueprints', {
       const bp = createBlueprint(type, {
         name: 'Untitled',
         handle: uniqueHandle('Untitled', handles),
+      })
+      this.blueprints.push(bp)
+      this.selectBlueprint(bp.id)
+    },
+
+    /** Create a blueprint pre-filled from a ready-made template. */
+    addBlueprintFromTemplate(template: BlueprintTemplate) {
+      const data = template.build()
+      const handles = this.blueprints.map((b) => b.handle)
+      const bp = createBlueprint(data.type, {
+        name: data.name,
+        handle: uniqueHandle(data.handle, handles),
+        navigation: data.navigation,
+        fields: data.fields,
       })
       this.blueprints.push(bp)
       this.selectBlueprint(bp.id)

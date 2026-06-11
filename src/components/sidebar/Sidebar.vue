@@ -96,8 +96,14 @@ function create(type: BlueprintType) {
       </template>
     </nav>
 
-    <!-- New blueprint -->
-    <div class="border-t border-border-subtle p-3">
+    <!-- New blueprint + templates -->
+    <div class="space-y-2 border-t border-border-subtle p-3">
+      <button
+        class="flex w-full items-center justify-center gap-2 rounded-lg px-3 h-9 text-[13px] font-medium text-content-secondary transition-colors hover:bg-hover hover:text-content-primary"
+        @click="ui.openTemplates()"
+      >
+        <Icon name="sparkles" :size="15" /> {{ t('templates.open') }}
+      </button>
       <NewBlueprintButton @create="create" />
     </div>
   </aside>
