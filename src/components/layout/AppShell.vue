@@ -12,7 +12,7 @@ const { size: rightWidth, startResize } = useResizable(440, 340, 760, { invert: 
 </script>
 
 <template>
-  <div class="flex h-screen w-screen overflow-hidden bg-surface-0 text-content-primary">
+  <div class="flex h-full w-full overflow-hidden bg-surface-0 text-content-primary">
     <!-- macOS drag region / traffic-light spacer -->
     <div data-tauri-drag-region class="fixed inset-x-0 top-0 z-40 h-7" />
 

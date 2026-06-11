@@ -49,6 +49,31 @@
     margin: 0;
   }
 
+  /* Scale the whole app up on large monitors so text & controls aren't tiny.
+     `zoom` reflows layout; height/width are divided by the same factor so the
+     zoomed result still fills the viewport exactly (no overflow). */
+  @media (min-width: 1600px) {
+    #app {
+      zoom: 1.2;
+      width: calc(100vw / 1.2);
+      height: calc(100vh / 1.2);
+    }
+  }
+  @media (min-width: 2000px) {
+    #app {
+      zoom: 1.35;
+      width: calc(100vw / 1.35);
+      height: calc(100vh / 1.35);
+    }
+  }
+  @media (min-width: 2560px) {
+    #app {
+      zoom: 1.5;
+      width: calc(100vw / 1.5);
+      height: calc(100vh / 1.5);
+    }
+  }
+
   body {
     @apply bg-surface-0 text-content-primary font-sans antialiased;
     -webkit-font-smoothing: antialiased;
