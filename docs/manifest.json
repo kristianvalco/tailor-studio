@@ -1,0 +1,36 @@
+{
+  "name": "Tailor Studio — Visual Builder for OctoberCMS Tailor",
+  "short_name": "Tailor Studio",
+  "description": "Free, open-source visual blueprint builder for OctoberCMS Tailor. Design content schemas visually and export clean Tailor YAML in real time.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "/tailor-studio/app/",
+  "scope": "/tailor-studio/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b0b0f",
+  "theme_color": "#0b0b0f",
+  "categories": ["developer", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/tailor-studio/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/tailor-studio/assets/screenshot-yaml.png",
+      "sizes": "2640x1720",
+      "type": "image/png",
+      "label": "Visual editor with live Tailor YAML"
+    },
+    {
+      "src": "/tailor-studio/assets/screenshot-editor.png",
+      "sizes": "2640x1720",
+      "type": "image/png",
+      "label": "Blueprint editor with drag-and-drop fields"
+    }
+  ]
+}

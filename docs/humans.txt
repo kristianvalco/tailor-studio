@@ -1,0 +1,20 @@
+/* TEAM */
+  Creator & Maintainer: Kristián Valčo
+  Site: https://kristianvalco.sk
+  GitHub: https://github.com/kristianvalco
+  From: Slovakia
+
+/* PROJECT */
+  Name: Tailor Studio
+  Description: A free, open-source visual blueprint builder for OctoberCMS Tailor.
+  Source: https://github.com/kristianvalco/tailor-studio
+  License: MIT
+  Version: 0.1.1
+
+/* THANKS */
+  OctoberCMS — https://octobercms.com
+  Design inspiration: Raycast, Linear, Arc
+
+/* TECHNOLOGY */
+  Tauri 2, Vue 3, TypeScript, Vite, Pinia, TailwindCSS, Monaco Editor
+  Hosted on GitHub Pages.

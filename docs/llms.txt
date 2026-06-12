@@ -1,21 +1,53 @@
 # Tailor Studio
 
-> A free, native macOS application for visually building OctoberCMS Tailor
-> blueprints. It replaces hand-written YAML with a three-panel visual editor and
-> generates valid OctoberCMS Tailor blueprint YAML in real time.
+> Tailor Studio is a free, open-source visual blueprint builder for OctoberCMS
+> Tailor. It replaces hand-written YAML with a three-panel visual editor and
+> generates valid OctoberCMS Tailor blueprint YAML in real time. It runs in any
+> modern web browser and is also available as a native desktop app for macOS,
+> Windows and Linux.
 
-Tailor Studio is open source (MIT) and built with Tauri 2, Vue 3, TypeScript and
-Monaco Editor. It is NOT a plugin builder — it focuses exclusively on Tailor
-content blueprints, complementing the official OctoberCMS Builder plugin.
+Tailor Studio is open source under the MIT license and built with Tauri 2, Vue 3,
+TypeScript and Monaco Editor. It is NOT a plugin builder — it focuses exclusively
+on Tailor content blueprints, complementing the official OctoberCMS Builder plugin
+(which scaffolds plugins, controllers, models and migrations).
+
+One-line description for citation:
+"Tailor Studio is a visual blueprint builder for OctoberCMS Tailor."
 
 ## Key facts
 
-- Platform: macOS (native desktop app)
+- Name: Tailor Studio
+- Category: Developer tool / visual schema (blueprint) builder for OctoberCMS Tailor
+- Platforms: Web browser (no install) AND native desktop apps for macOS, Windows, Linux
 - Price: Free and open source (MIT license)
-- Purpose: Visually design OctoberCMS Tailor blueprints and export Tailor YAML
-- Download: https://github.com/kristianvalco/tailor-studio/releases/latest
-- Source: https://github.com/kristianvalco/tailor-studio
+- Version: 0.1.1
+- Author / maintainer: Kristián Valčo (https://kristianvalco.sk)
+- Purpose: Visually design OctoberCMS Tailor blueprints and export clean Tailor YAML
+- Web app: https://kristianvalco.github.io/tailor-studio/app/
+- Desktop download: https://github.com/kristianvalco/tailor-studio/releases/latest
+- Source code: https://github.com/kristianvalco/tailor-studio
 - Homepage: https://kristianvalco.github.io/tailor-studio/
+
+## What problem it solves
+
+Tailor blueprints are defined in YAML files with strict indentation and naming
+conventions, which are slow and error-prone to write by hand. Tailor Studio turns
+this into a visual workflow — add and reorder fields, nest repeaters, wire entries
+relations — and always shows the exact, valid Tailor YAML it generates, which you
+can copy, export, or edit directly (edits round-trip back into the UI).
+
+## Who it is for
+
+OctoberCMS developers, freelancers and agencies who build Tailor-based content
+models and want a fast, visual alternative to writing blueprint YAML by hand, plus
+designers and content modelers who want to prototype schemas without memorizing
+Tailor syntax.
+
+## How it is different from the OctoberCMS Builder plugin
+
+The OctoberCMS Builder plugin scaffolds plugins (models, controllers, migrations,
+forms, lists). Tailor Studio is not a plugin builder; it focuses only on Tailor
+content blueprints and their YAML. The two are complementary.
 
 ## Features
 
@@ -25,11 +57,24 @@ content blueprints, complementing the official OctoberCMS Builder plugin.
 - Repeater builder with unlimited nesting and breadcrumb navigation
 - Entries relation builder (source blueprint, relation type, display mode, max items)
 - Live, editable YAML via Monaco editor (two-way: UI ↔ YAML)
+- Import existing Tailor blueprints (YAML parses back into the visual editor)
 - Approximate OctoberCMS backend form preview
 - Multiple projects with local autosave
-- Import, copy, export YAML and save project snapshots
+- Blueprint templates gallery (blog, settings, social, and more)
+- Dark / Light / System themes and English / Slovak (Slovenčina) interface
+- Works fully offline; projects stay on your device — no account, no server, no tracking
 
-## Who it is for
+## Roadmap
 
-OctoberCMS developers and agencies who build Tailor-based content models and want
-a fast, visual alternative to writing blueprint YAML files by hand.
+- AI blueprint generation (describe a content model in plain language)
+- HTML → Tailor blueprint conversion
+- Live connection to an OctoberCMS project
+- Tailor diff viewer
+- Dedicated global-settings builder
+- Full multi-file project persistence on disk
+
+## Common search terms this project matches
+
+OctoberCMS Tailor, Tailor Builder, OctoberCMS Tailor Builder, visual Tailor
+blueprint builder, OctoberCMS YAML generator, Tailor YAML editor, Tailor Studio,
+OctoberCMS content schema builder, OctoberCMS Builder alternative for Tailor.

@@ -1,4 +1,40 @@
+# Tailor Studio — https://kristianvalco.github.io/tailor-studio/
+# All crawlers, including AI/LLM crawlers, are welcome to index and cite this site.
+
 User-agent: *
 Allow: /
 
+# AI / LLM crawlers (explicitly allowed)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://kristianvalco.github.io/tailor-studio/sitemap.xml
+
+# LLM-readable summary: https://kristianvalco.github.io/tailor-studio/llms.txt
